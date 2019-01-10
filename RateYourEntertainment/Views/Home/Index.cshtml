@@ -1,0 +1,15 @@
+﻿@model .ViewModels.HomeViewModel
+<h2>@Model.Title</h2>
+    @foreach(var game in Model.Games)
+    {
+<div class="col-sm-4 col-lg-4 col-md-4">
+    <div class="thumbnail">
+        <img src="@game.ImageThumbnailURL" alt="">
+    <div class="caption">
+        <h3 class="pull-right">@game.Genre</h3>
+        <h3>@game.Name</h3>
+        <h3>@game.ShortDescription</h3>
+    </div>
+    </div>
+</div>
+    }
