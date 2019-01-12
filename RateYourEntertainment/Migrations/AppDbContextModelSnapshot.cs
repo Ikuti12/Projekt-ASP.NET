@@ -28,6 +28,10 @@ namespace RateYourEntertainment.Migrations
 
                     b.Property<string>("ImageThumbnailURL");
 
+                    b.Property<string>("ImageURL");
+
+                    b.Property<string>("LongDescription");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("ShortDescription");

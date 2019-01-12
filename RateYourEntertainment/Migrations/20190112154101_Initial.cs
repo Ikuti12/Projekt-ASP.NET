@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RateYourEntertainment.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,10 +16,9 @@ namespace RateYourEntertainment.Migrations
                     Name = table.Column<string>(nullable: true),
                     ShortDescription = table.Column<string>(nullable: true),
                     LongDescription = table.Column<string>(nullable: true),
-                    ImageURL = table.Column<string>(nullable: true),
                     ImageThumbnailURL = table.Column<string>(nullable: true),
-                    Genre = table.Column<string>(nullable: true),
-                    GameOfTheMonth = table.Column<bool>(nullable: false)
+                    ImageURL = table.Column<string>(nullable: true),
+                    Genre = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

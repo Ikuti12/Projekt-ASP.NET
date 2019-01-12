@@ -28,5 +28,12 @@ namespace RateYourEntertainment.Controllers
 
             return View(homeViewModel);
         }
+        public IActionResult Details(int id)
+        {
+            var game = _gameRepository.GetGameById(id);
+            if (game == null)
+                return NotFound();
+            return View(game);
+        }
     }
 }

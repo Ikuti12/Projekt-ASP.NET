@@ -9,8 +9,8 @@ using RateYourEntertainment.Models;
 namespace RateYourEntertainment.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190112123655_initialMigration")]
-    partial class initialMigration
+    [Migration("20190112154101_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,6 @@ namespace RateYourEntertainment.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("GameOfTheMonth");
 
                     b.Property<string>("Genre");
 
