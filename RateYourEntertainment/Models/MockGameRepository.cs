@@ -20,7 +20,7 @@ namespace RateYourEntertainment.Models
         {
             _games = new List<Game>
             {
-                new Game {Id=1, Name ="Divinity: Original Sin 2",ShortDescription="The eagerly anticipated sequel to the award-winning RPG. Gather your party. Master deep, tactical combat. Join up to 3 other players - but know that only one of you will have the chance to become a God.", LongDescription="Who will you be?"+
+            /*    new Game {Id=1, Name ="Divinity: Original Sin 2",ShortDescription="The eagerly anticipated sequel to the award-winning RPG. Gather your party. Master deep, tactical combat. Join up to 3 other players - but know that only one of you will have the chance to become a God.", LongDescription="Who will you be?"+
 "A flesh-eating Elf, an Imperial Lizard or an Undead, risen from the grave? Discover how the world reacts differently to who - or what - you are."+
 "It’s time for a new Divinity!"+
 "Gather your party and develop relationships with your companions.Blast your opponents in deep, tactical, turn - based combat.Use the environment as a weapon, use height to your advantage, and manipulate the elements themselves to seal your victory."+
@@ -34,7 +34,7 @@ namespace RateYourEntertainment.Models
 "STRATEGY UNBOUNDED"+
 "Wield your deck across three lanes of combat, answer every move of your opponent with one of your own. Unlimited hand size. Unlimited number of units you control. Unlimited mana you can employ."+
 "It’s up to you to decide the best way to navigate the constantly shifting tide of battle.", Genre="Card Game", GameOfTheMonth=false, ImageURL="",ImageThumbnailURL="https://steamcdn-a.akamaihd.net/steam/apps/583950/header.jpg?t=1546453082"}
-            };
+            */};
         }
         public IEnumerable<Game> GetAllGames()
         {
