@@ -24,9 +24,15 @@ namespace RateYourEntertainment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("GameOfTheMonth");
+
                     b.Property<string>("Genre");
 
                     b.Property<string>("ImageThumbnailURL");
+
+                    b.Property<string>("ImageURL");
+
+                    b.Property<string>("LongDescription");
 
                     b.Property<string>("Name");
 
