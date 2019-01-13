@@ -3,14 +3,14 @@
 {
 
     <div class="row">
-        <a asp-controller="Home" asp-action="Details" asp-route-id="@game.Id">
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@game.GameId">
             <div class="thumbnail">
 
                 <div class="caption">
                     <img src="@game.ImageThumbnailURL" alt="">
                     <h3 class="pull-right special">Score:10</h3>
                     <h3></h3>
-                    <h3 class="pull-right special">@game.Genre</h3>
+                    <h3 class="pull-right special">@*@game.Genre*@</h3>
                     <h3 class="special">
                         @game.Name
                     </h3>

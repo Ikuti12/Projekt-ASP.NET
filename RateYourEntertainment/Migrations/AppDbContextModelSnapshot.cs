@@ -186,6 +186,21 @@ namespace RateYourEntertainment.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("RateYourEntertainment.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName");
+
+                    b.Property<string>("Description");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("RateYourEntertainment.Models.Feedback", b =>
                 {
                     b.Property<int>("FeedbackId")
@@ -213,11 +228,11 @@ namespace RateYourEntertainment.Migrations
 
             modelBuilder.Entity("RateYourEntertainment.Models.Game", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GameId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Genre");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("ImageThumbnailURL");
 
@@ -225,13 +240,35 @@ namespace RateYourEntertainment.Migrations
 
                     b.Property<string>("LongDescription");
 
+                    b.Property<int>("MultiplayerInformation");
+
                     b.Property<string>("Name");
 
-                    b.Property<string>("ShortDescription");
+                    b.Property<string>("ShortDescription")
+                        .HasMaxLength(400);
 
-                    b.HasKey("Id");
+                    b.HasKey("GameId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("RateYourEntertainment.Models.GameReview", b =>
+                {
+                    b.Property<int>("GameReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("GameId");
+
+                    b.Property<string>("Review");
+
+                    b.HasKey("GameReviewId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameReviews");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -245,7 +282,7 @@ namespace RateYourEntertainment.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("RateYourEntertainment.Auth.ApplicationUser")
-                        .WithMany()
+                        .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -277,6 +314,21 @@ namespace RateYourEntertainment.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RateYourEntertainment.Models.Game", b =>
+                {
+                    b.HasOne("RateYourEntertainment.Models.Category", "Category")
+                        .WithMany("Games")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("RateYourEntertainment.Models.GameReview", b =>
+                {
+                    b.HasOne("RateYourEntertainment.Models.Game", "Game")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("GameId");
                 });
 #pragma warning restore 612, 618
         }

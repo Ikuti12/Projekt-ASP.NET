@@ -39,8 +39,6 @@
             </cache>
 
                     <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-                    <li><a asp-controller="Home" asp-action="Index" asp-area="Promo">Promotions</a></li>
-                    @await Component.InvokeAsync("ShoppingCartSummary")
 
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrators"))
                     {
@@ -61,14 +59,13 @@
                 <div class="row">
                     <div class="col-md-3">
                         <p class="lead">
-                            <img class="img-responsive" alt="Rate Your Entertainment'" src="~/Images/bethanylogo.png" />
+                            <img class="img-responsive" alt="Rate Your Entertainment'" src="" />
                         </p>
                     </div>
                     <div class="col-md-9">
                         @RenderBody()
                     </div>
                     @await Component.InvokeAsync("SystemStatusPage")
-                    @await Html.PartialAsync("LanguageSelection")
                 </div>
             </div>
 
