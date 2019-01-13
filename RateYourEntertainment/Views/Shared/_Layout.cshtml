@@ -1,47 +1,87 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using System.Security.Claims
+@using System.Threading.Tasks
+@using RateYourEntertainment.Auth
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject IAuthorizationService AuthorizationService
+@inject UserManager<ApplicationUser> UserManager
 
 <!DOCTYPE html>
-
-@inject SignInManager<IdentityUser> SignInManager
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="~/css/site.css"/>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
 
-                    <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Rate Your Entertainment</a></li>
-                    <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
-                </ul>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm"
-                          method="post" class="navbar-right">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-                        </ul>
-                    </form>
-                }
-                else
-                {
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a id="registerLink" asp-controller="Account" asp-action="Register">Register</a></li>
-                        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Log in</a></li>
-                    </ul>
-                }
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-        </div>
-    </nav>
-    <div class="container body-content">
-        <div class="row">
-            @RenderBody()
-        </div>
-    </div>
-</body>
-</html>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+
+                    <cache expires-sliding="@TimeSpan.FromSeconds(10)">
+                @await Component.InvokeAsync("CategoryMenu")
+            </cache>
+
+                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
+                    <li><a asp-controller="Home" asp-action="Index" asp-area="Promo">Promotions</a></li>
+                    @await Component.InvokeAsync("ShoppingCartSummary")
+
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrators"))
+                    {
+                        @await Component.InvokeAsync("AdminMenu")
+
+                        <li class="dropdown">
+                            <a asp-controller="GameManagement"
+                               asp-action="Index">Game Management</a>
+                        </li>
+                    }
+                </ul>
+                @await Html.PartialAsync("LoginPartial")
+            </div>
+                </div>
+            </nav>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="lead">
+                            <img class="img-responsive" alt="Rate Your Entertainment'" src="~/Images/bethanylogo.png" />
+                        </p>
+                    </div>
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
+                    @await Component.InvokeAsync("SystemStatusPage")
+                    @await Html.PartialAsync("LanguageSelection")
+                </div>
+            </div>
+
+            <environment names="Development">
+                <link rel="stylesheet" href="~/Content/site.css" />
+                <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            </environment>
+            <environment names="Staging,Production">
+                <link rel="stylesheet" href="~/Content/site.min.css" />
+                <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            </environment>
+
+            @RenderSection("scripts", required: false)
+
+        </body>
+        </html>
