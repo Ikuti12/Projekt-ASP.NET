@@ -13,17 +13,6 @@ namespace RateYourEntertainment.Models
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-
-            builder.Entity<ApplicationUser>()
-                .HasMany(e => e.Claims)
-                .WithOne()
-                .HasForeignKey(e => e.UserId)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
-        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<GameReview> GameReviews { get; set; }
         public DbSet<Game> Games { get; set; }

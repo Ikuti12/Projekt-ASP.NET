@@ -6,8 +6,7 @@
 
   <ItemGroup>
     <Folder Include="TagHelpers\" />
-    <Folder Include="Views\Contact\" />
-    <Folder Include="Views\Game\" />
+    <Folder Include="Views\GameManagement\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

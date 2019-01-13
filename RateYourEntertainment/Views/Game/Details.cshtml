@@ -1,0 +1,46 @@
+﻿
+@using System.Net
+@using System.Threading.Tasks
+@model GameDetailViewModel
+
+<div class="thumbnail">
+    <img alt="@Model.Game.Name" src="@Model.Game.ImageURL">
+    <div class="caption-full">
+        <h3 class="pull-right">abc</h3>
+        <h3>
+            <a href="#">@Model.Game.Name</a>
+        </h3>
+        <h4>@Model.Game.ShortDescription</h4>
+        <p>@Model.Game.LongDescription</p>
+    </div>
+</div>
+
+<h3>Reviews for this game</h3>
+
+@foreach (var review in @Model.Game.GameReviews)
+{
+    <div>@WebUtility.HtmlDecode(review.Review) </div>
+    <hr />
+}
+
+<form asp-controller="Game" asp-action="Details" method="post" class="form-horizontal" role="form">
+    <h4>Write a review</h4>
+    <hr />
+    <input type="hidden" asp-for="@Model.Game.GameId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Review" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Review" class="form-control" />
+            <span asp-validation-for="Review" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Send review" />
+        </div>
+    </div>
+
+</form>

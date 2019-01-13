@@ -5,80 +5,58 @@
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
-
+<!DOCTYPE html>
 @inject SignInManager<ApplicationUser> SignInManager
 @inject IAuthorizationService AuthorizationService
 @inject UserManager<ApplicationUser> UserManager
-
-<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/content/site.css" />
 </head>
 <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-
-                    <cache expires-sliding="@TimeSpan.FromSeconds(10)">
-                @await Component.InvokeAsync("CategoryMenu")
-            </cache>
-
-                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
-
-                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrators"))
-                    {
-                        @await Component.InvokeAsync("AdminMenu")
-
-                        <li class="dropdown">
-                            <a asp-controller="GameManagement"
-                               asp-action="Index">Game Management</a>
-                        </li>
-                    }
+                    <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Pie shop</a></li>
+                    <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
                 </ul>
-                @await Html.PartialAsync("LoginPartial")
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Admin" asp-action="UserManagement">User Administration</a></li>
+                            <li><a asp-controller="Admin" asp-action="RoleManagement">Role Administration</a></li>
+                        </ul>
+                    }
+                    <form asp-area="" asp-controller="Account" asp-action="Logout" id="logoutForm" method="post" class="navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+                        </ul>
+                    </form>
+                }
+
+
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a id="registerLink" asp-controller="Account" asp-action="Register">Register</a></li>
+                        <li><a id="loginLink" asp-controller="Account" asp-action="Login">Log in</a></li>
+                    </ul>
+                }
+
+
             </div>
-                </div>
-            </nav>
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <p class="lead">
-                            <img class="img-responsive" alt="Rate Your Entertainment'" src="" />
-                        </p>
-                    </div>
-                    <div class="col-md-9">
-                        @RenderBody()
-                    </div>
-                    @await Component.InvokeAsync("SystemStatusPage")
-                </div>
-            </div>
-
-            <environment names="Development">
-                <link rel="stylesheet" href="~/Content/site.css" />
-                <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            </environment>
-            <environment names="Staging,Production">
-                <link rel="stylesheet" href="~/Content/site.min.css" />
-                <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-            </environment>
-
-            @RenderSection("scripts", required: false)
-
-        </body>
-        </html>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

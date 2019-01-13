@@ -189,16 +189,10 @@ namespace RateYourEntertainment
 
             app.UseMvc(routes =>
             {
-
-                //areas
-                routes.MapRoute(
-                    name: "areas",
-                    template: "{area:exists}/{controller=Home}/{action=Index}");
-
                 routes.MapRoute(
                   name: "categoryfilter",
-                  template: "Pie/{action}/{category?}",
-                  defaults: new { Controller = "Pie", action = "List" });
+                  template: "Game/{action}/{category?}",
+                  defaults: new { Controller = "Game", action = "List" });
 
                 routes.MapRoute(
                 name: "default",
