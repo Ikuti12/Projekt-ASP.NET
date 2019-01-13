@@ -1,9 +1,28 @@
 ﻿
 body {
+    background: #2b2c2d;
     padding-top: 50px;
     padding-bottom: 20px;
 }
-
+a:link {
+    /* Applies to all unvisited links */
+    text-decoration: none;
+}
+.thumbnail {
+    background-color: #171717;
+    border-color: #171717;
+}
+.row {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.navbar-default {
+    background-color: #171717;
+    border-color: #171717;
+}
+.special {
+    color: #dcdada
+}
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {

@@ -1,14 +1,28 @@
 ﻿@model Game
 
-<h2>@Model.Name</h2>
-<div class="thumbnail">
-    <img alt="@Model.Name" src="@Model.ImageURL">
+<h2 class="special">@Model.Name</h2>
+<div class="thumbnail col-sm-12">
+    <img alt="@Model.Name" src="@Model.ImageThumbnailURL">
     <div class="caption-full">
-        <h3 class="pull-right">@Model.Genre</h3>
-        <h3>
+        <h3 class="special">
             <a href="#">@Model.Name</a>
         </h3>
-        <h4>@Model.ShortDescription</h4>
-        <p>@Model.LongDescription</p>
+        <h3 class="special">@Model.Genre</h3>
+        <div class="row">
+            <h4 class="special col-sm-5">@Model.ShortDescription</h4>
+            <h3 class="pull-right col-sm-5 special">Score</h3>
+        </div>
+        <p class="special">
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris malesuada, erat nec condimentum condimentum, ipsum eros varius orci, eget condimentum est arcu sed tellus. Nulla eu sodales arcu. Nullam ullamcorper ultricies turpis, quis consequat augue pulvinar eget. Nulla dolor tellus, varius id tellus sed, fermentum porttitor turpis. Curabitur eu nulla eu est convallis efficitur eget non massa. Nunc vitae nisi pulvinar enim posuere pellentesque. Donec varius venenatis dui eget pharetra.
+
+            Aliquam eget quam vitae dolor porta tristique. In pellentesque ornare massa. Aliquam id felis quis ipsum lobortis condimentum. Vivamus ultricies tortor risus, eget malesuada diam facilisis id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam commodo, magna pharetra consectetur posuere, dui lacus eleifend massa, sit amet ultricies orci lacus id odio. Morbi eu justo orci. Aenean eleifend ut tellus sit amet posuere. Curabitur imperdiet est rutrum condimentum elementum. Vestibulum quam urna, accumsan eget viverra et, placerat eu ante. Curabitur aliquet cursus diam, eu sollicitudin lectus tempus in. Sed ullamcorper odio nec quam accumsan dignissim. Nulla tincidunt, magna nec malesuada rutrum, velit orci aliquam tellus, ac mattis est massa ac augue. Nam vitae mi odio. Nam condimentum, odio ac convallis euismod, quam felis bibendum leo, et dignissim nunc massa id neque.
+
+            Proin eu ultricies felis. In quis mi quam. Proin semper lorem eu dignissim fringilla. Vivamus et sem id tellus faucibus lacinia. Pellentesque tincidunt dapibus neque, eu lacinia odio vehicula eu. Mauris non nisl vulputate, tempor ante eget, maximus tortor. Curabitur eget orci sit amet enim facilisis ornare. In sed placerat elit.
+
+            Pellentesque vitae mauris eget orci cursus lobortis. Mauris sit amet erat id justo molestie finibus sit amet quis sapien. Praesent fringilla metus sit amet ex dignissim auctor. Nullam quis tellus sed enim elementum tincidunt id nec orci. Nulla scelerisque, eros sed varius porttitor, justo tellus volutpat justo, eget dignissim nibh odio eget diam. Praesent at enim sed turpis accumsan tristique eget a tortor. Fusce ut quam nibh. Curabitur elementum tortor ut neque varius ornare. Integer quis ultricies odio.
+
+            Sed feugiat ex eros, eu facilisis dolor maximus et. Nullam id urna fringilla, euismod ipsum a, eleifend mauris. Fusce efficitur dictum dignissim. Vestibulum lectus est, accumsan ut dolor vitae, eleifend cursus risus. Donec at nunc purus. Quisque urna urna, dignissim vel finibus in, faucibus vitae nulla. Aenean auctor nulla sed nulla euismod finibus. Vestibulum felis nisl, fringilla cursus lectus ac, tincidunt rutrum leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam porttitor nunc tortor, sit amet luctus dolor interdum sit amet.
+        </p>
     </div>
 </div>
