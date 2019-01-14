@@ -6,15 +6,16 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RateYourEntertainment.ViewModels;
+using RateYourEntertainment.Auth;
 
 namespace RateYourEntertainment.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller 
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -39,7 +40,7 @@ namespace RateYourEntertainment.Controllers
         {
             if (!ModelState.IsValid) return View(addUserViewModel);
 
-            var user = new IdentityUser()
+            var user = new ApplicationUser()
             {
                 UserName = addUserViewModel.UserName,
                 Email = addUserViewModel.Email
@@ -65,10 +66,11 @@ namespace RateYourEntertainment.Controllers
                 return RedirectToAction("UserManagement", _userManager.Users);
 
             var claims = await _userManager.GetClaimsAsync(user);
-            var vm = new EditUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName };
+            var vm = new EditUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName, UserClaims = claims.Select(c => c.Value).ToList() };
 
             return View(vm);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserViewModel editUserViewModel)
         {
@@ -274,6 +276,40 @@ namespace RateYourEntertainment.Controllers
             }
 
             return View(userRoleViewModel);
+        }
+        //Claims
+        public async Task<IActionResult> ManageClaimsForUser(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                return RedirectToAction("UserManagement", _userManager.Users);
+
+            var claimsManagementViewModel = new ClaimsManagementViewModel { UserId = user.Id, AllClaimsList = RateYourEntertainmentClaimTypes.ClaimsList };
+
+            return View(claimsManagementViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ManageClaimsForUser(ClaimsManagementViewModel claimsManagementViewModel)
+        {
+            var user = await _userManager.FindByIdAsync(claimsManagementViewModel.UserId);
+
+            if (user == null)
+                return RedirectToAction("UserManagement", _userManager.Users);
+
+            IdentityUserClaim<string> claim =
+                new IdentityUserClaim<string> { ClaimType = claimsManagementViewModel.ClaimId, ClaimValue = claimsManagementViewModel.ClaimId };
+
+            user.Claims.Add(claim);
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+                return RedirectToAction("UserManagement", _userManager.Users);
+
+            ModelState.AddModelError("", "User not updated, something went wrong.");
+
+            return View(claimsManagementViewModel);
         }
     }
 }

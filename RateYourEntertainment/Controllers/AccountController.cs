@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RateYourEntertainment.ViewModels;
+using RateYourEntertainment.Auth;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,10 +14,10 @@ namespace RateYourEntertainment.Controllers
     public class AccountController : Controller
     {
 
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -56,7 +57,7 @@ namespace RateYourEntertainment.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                var user = new ApplicationUser()
                 { UserName = loginViewModel.UserName };
                 var result =
                     await _userManager.CreateAsync

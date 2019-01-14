@@ -5,28 +5,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Auth\**" />
     <Compile Remove="Components\**" />
     <Compile Remove="Filters\**" />
     <Compile Remove="TagHelpers\**" />
     <Compile Remove="Utility\**" />
     <Compile Remove="Views\Contact\**" />
     <Compile Remove="Views\Game\**" />
-    <Content Remove="Auth\**" />
     <Content Remove="Components\**" />
     <Content Remove="Filters\**" />
     <Content Remove="TagHelpers\**" />
     <Content Remove="Utility\**" />
     <Content Remove="Views\Contact\**" />
     <Content Remove="Views\Game\**" />
-    <EmbeddedResource Remove="Auth\**" />
     <EmbeddedResource Remove="Components\**" />
     <EmbeddedResource Remove="Filters\**" />
     <EmbeddedResource Remove="TagHelpers\**" />
     <EmbeddedResource Remove="Utility\**" />
     <EmbeddedResource Remove="Views\Contact\**" />
     <EmbeddedResource Remove="Views\Game\**" />
-    <None Remove="Auth\**" />
     <None Remove="Components\**" />
     <None Remove="Filters\**" />
     <None Remove="TagHelpers\**" />
