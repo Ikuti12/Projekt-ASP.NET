@@ -299,7 +299,7 @@ namespace RateYourEntertainment.Controllers
                 return RedirectToAction("UserManagement", _userManager.Users);
 
             IdentityUserClaim<string> claim =
-                new IdentityUserClaim<string> { ClaimType = claimsManagementViewModel.ClaimId, ClaimValue = claimsManagementViewModel.ClaimId };
+                new IdentityUserClaim<string> { ClaimType = claimsManagementViewModel.ClaimId, ClaimValue = claimsManagementViewModel.ClaimId, UserId=user.Id };
 
             user.Claims.Add(claim);
             var result = await _userManager.UpdateAsync(user);

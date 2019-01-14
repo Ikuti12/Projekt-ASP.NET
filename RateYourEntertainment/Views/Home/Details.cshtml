@@ -1,4 +1,6 @@
-﻿@model GameDetailViewModel
+﻿
+@using System.Net
+@model GameDetailViewModel
 
 <h2 class="special">@Model.Game.Name</h2>
 <div class="thumbnail col-sm-12">
@@ -27,3 +29,33 @@
     </div>
 
 </div>
+<h3>Reviews for this game:</h3>
+@foreach (var review in @Model.Game.GameReviews)
+{
+    <div>@WebUtility.HtmlDecode(review.Review) </div>
+    <hr />
+}
+<form asp-controller="Home" asp-action="Details" method="post" class="form-horizontal" role="form">
+    <h4>Write a review</h4>
+    <hr />
+    <input type="hidden" asp-for="@Model.Game.GameId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Review" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.Review, 15, 1, new { @class = "form-control" })
+            <span asp-validation-for="Review" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReviewScore" class="col-md-2 control-label"></label>
+        <div class="col-md-1">
+            <input type="number" asp-for="ReviewScore" class="form-control" min="1" step="1" max="5" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Send review" />
+        </div>
+    </div>
+</form>

@@ -10,6 +10,7 @@ namespace RateYourEntertainment.ViewModels
     {
         public Game Game { get; set; }
         public string Review { get; set; }
+        public int ReviewScore { get; set; }
         public Category Category { get; set; }
     }
 }

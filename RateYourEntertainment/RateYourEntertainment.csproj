@@ -5,31 +5,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Components\**" />
     <Compile Remove="Filters\**" />
     <Compile Remove="TagHelpers\**" />
-    <Compile Remove="Utility\**" />
     <Compile Remove="Views\Contact\**" />
-    <Content Remove="Components\**" />
+    <Compile Remove="wwwroot\images\**" />
     <Content Remove="Filters\**" />
     <Content Remove="TagHelpers\**" />
-    <Content Remove="Utility\**" />
     <Content Remove="Views\Contact\**" />
-    <EmbeddedResource Remove="Components\**" />
+    <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Filters\**" />
     <EmbeddedResource Remove="TagHelpers\**" />
-    <EmbeddedResource Remove="Utility\**" />
     <EmbeddedResource Remove="Views\Contact\**" />
-    <None Remove="Components\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Filters\**" />
     <None Remove="TagHelpers\**" />
-    <None Remove="Utility\**" />
     <None Remove="Views\Contact\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Game\" />
-    <Folder Include="wwwroot\images\" />
+    <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>

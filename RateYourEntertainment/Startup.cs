@@ -37,7 +37,7 @@ namespace RateYourEntertainment
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
-            //services.AddTransient<IPieReviewRepository, PieReviewRepository>();
+            services.AddTransient<IGameReviewRepository, GameReviewRepository>();
 
             //services.AddScoped
             services.AddMvc();

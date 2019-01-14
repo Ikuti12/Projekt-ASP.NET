@@ -5,5 +5,6 @@
         public int GameReviewId { get; set; }
         public Game Game { get; set; }
         public string Review { get; set; }
+        public int ReviewScore { get; set; }
     }
 }
