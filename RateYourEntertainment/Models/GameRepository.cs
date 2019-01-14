@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace RateYourEntertainment.Models
 {
@@ -17,9 +16,27 @@ namespace RateYourEntertainment.Models
         {
             return _appDbContext.Games;
         }
+        public IEnumerable<Game> Games
+        {
+            get
+            {
+                return _appDbContext.Games.Include(c => c.Category);
+            }
+        }
         public Game GetGameById(int gameId)
         {
-            return _appDbContext.Games.FirstOrDefault(g => g.Id == gameId);
+            return _appDbContext.Games.Include(g => g.GameReviews).FirstOrDefault(g => g.GameId == gameId);
+        }
+        public void UpdateGame (Game game)
+        {
+            _appDbContext.Games.Update(game);
+            _appDbContext.SaveChanges();
+        }
+
+        public void CreateGame(Game game)
+        {
+            _appDbContext.Games.Add(game);
+            _appDbContext.SaveChanges();
         }
     }
 }

@@ -13,17 +13,21 @@ namespace RateYourEntertainment.Controllers
     public class HomeController : Controller
     {
         private readonly IGameRepository _gameRepository;
-        public HomeController( IGameRepository gameRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public HomeController( IGameRepository gameRepository, ICategoryRepository categoryRepository)
         {
             _gameRepository = gameRepository;
+            _categoryRepository = categoryRepository;
         }
         public IActionResult Index()
         {
             var games = _gameRepository.GetAllGames().OrderBy(g => g.Name);
+            var categories = _categoryRepository.GetAllCategories().OrderBy(c => c.CategoryName);
             var homeViewModel = new HomeViewModel()
             {
                 Title = "Welcome to the best website to look at rating for your favorite entertainment media. RateYourEntertainment.com",
-                Games = games.ToList()
+                Games = games.ToList(),
+                Categories = categories.ToList()
             };
 
             return View(homeViewModel);
@@ -32,8 +36,11 @@ namespace RateYourEntertainment.Controllers
         {
             var game = _gameRepository.GetGameById(id);
             if (game == null)
-                return NotFound();
-            return View(game);
+            {
+                //throw new GameNotFoundException();
+            }
+            var category = _categoryRepository.GetCategoryById(game.CategoryId);
+            return View(new GameDetailViewModel() { Game = game , Category= category });
         }
     }
 }

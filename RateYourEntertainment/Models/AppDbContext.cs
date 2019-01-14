@@ -17,5 +17,7 @@ namespace RateYourEntertainment.Models
         }
         public DbSet<Game> Games { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<GameReview> GameReviews { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

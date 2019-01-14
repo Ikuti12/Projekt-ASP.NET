@@ -36,7 +36,7 @@ namespace RateYourEntertainment
 
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
-            //services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
             //services.AddTransient<IPieReviewRepository, PieReviewRepository>();
 
             //services.AddScoped
@@ -61,16 +61,11 @@ namespace RateYourEntertainment
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-  name: "categoryfilter",
-  template: "Game/{action}/{category?}",
-  defaults: new { Controller = "Game", action = "List" });
-                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}"
                     );
             }
             );
-
 
         }
     }

@@ -6,10 +6,10 @@ using RateYourEntertainment.Models;
 
 namespace RateYourEntertainment.ViewModels
 {
-    public class HomeViewModel
+    public class GameDetailViewModel
     {
-        public string Title { get; set; }
-        public List<Game> Games {get;set;}
-        public List<Category> Categories { get; set; }
+        public Game Game { get; set; }
+        public string Review { get; set; }
+        public Category Category { get; set; }
     }
 }

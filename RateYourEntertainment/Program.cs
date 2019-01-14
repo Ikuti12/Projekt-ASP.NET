@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RateYourEntertainment.Models;
+using RateYourEntertainment.Auth;
 
 namespace RateYourEntertainment
 {
@@ -25,7 +26,7 @@ namespace RateYourEntertainment
                 try
                 {
                     var context = services.GetRequiredService<AppDbContext>();
-                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     DbInitializer.Seed(context);
                     DbInitializer.SeedUsers(userManager, roleManager);

@@ -1,15 +1,15 @@
-﻿@model Game
+﻿@model GameDetailViewModel
 
-<h2 class="special">@Model.Name</h2>
+<h2 class="special">@Model.Game.Name</h2>
 <div class="thumbnail col-sm-12">
-    <img alt="@Model.Name" src="@Model.ImageThumbnailURL">
+    <img alt="@Model.Game.Name" src="@Model.Game.ImageThumbnailURL">
     <div class="caption-full">
         <h3 class="special">
-            <a href="#">@Model.Name</a>
+            <a href="#">@Model.Game.Name</a>
         </h3>
-        <h3 class="special">@Model.Genre</h3>
+        <h3 class="special">@Model.Category.CategoryName</h3>
         <div class="row">
-            <h4 class="special col-sm-5">@Model.ShortDescription</h4>
+            <h4 class="special col-sm-5">@Model.Game.ShortDescription</h4>
             <h3 class="pull-right col-sm-5 special">Score</h3>
         </div>
         <p class="special">
@@ -25,4 +25,5 @@
             Sed feugiat ex eros, eu facilisis dolor maximus et. Nullam id urna fringilla, euismod ipsum a, eleifend mauris. Fusce efficitur dictum dignissim. Vestibulum lectus est, accumsan ut dolor vitae, eleifend cursus risus. Donec at nunc purus. Quisque urna urna, dignissim vel finibus in, faucibus vitae nulla. Aenean auctor nulla sed nulla euismod finibus. Vestibulum felis nisl, fringilla cursus lectus ac, tincidunt rutrum leo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam porttitor nunc tortor, sit amet luctus dolor interdum sit amet.
         </p>
     </div>
+
 </div>
