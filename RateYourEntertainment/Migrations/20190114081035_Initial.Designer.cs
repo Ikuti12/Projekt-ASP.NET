@@ -10,8 +10,8 @@ using RateYourEntertainment.Models;
 namespace RateYourEntertainment.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190112203302_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20190114081035_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

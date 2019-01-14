@@ -15,10 +15,12 @@ namespace RateYourEntertainment.Controllers
 
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager)
+        private readonly RoleManager<IdentityRole> _roleManager;
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
         // GET: /<controller>/
         public IActionResult Login()
@@ -61,11 +63,14 @@ namespace RateYourEntertainment.Controllers
                     (user, loginViewModel.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var role = await _roleManager.FindByNameAsync("User");
+
+                    await _userManager.AddToRoleAsync(user, role.Name);
                 }
             }
             return View(loginViewModel);
         }
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

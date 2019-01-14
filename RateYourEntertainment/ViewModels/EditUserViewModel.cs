@@ -22,9 +22,5 @@ namespace RateYourEntertainment.ViewModels
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthdate { get; set; }
-
-        public string City { get; set; }
-
-        public string Country { get; set; }
     }
 }

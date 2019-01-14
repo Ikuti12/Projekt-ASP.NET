@@ -5,13 +5,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Filters\" />
-    <Folder Include="Auth\" />
-    <Folder Include="Components\" />
-    <Folder Include="Utility\" />
-    <Folder Include="TagHelpers\" />
-    <Folder Include="Views\Contact\" />
-    <Folder Include="Views\Game\" />
+    <Compile Remove="Auth\**" />
+    <Compile Remove="Components\**" />
+    <Compile Remove="Filters\**" />
+    <Compile Remove="TagHelpers\**" />
+    <Compile Remove="Utility\**" />
+    <Compile Remove="Views\Contact\**" />
+    <Compile Remove="Views\Game\**" />
+    <Content Remove="Auth\**" />
+    <Content Remove="Components\**" />
+    <Content Remove="Filters\**" />
+    <Content Remove="TagHelpers\**" />
+    <Content Remove="Utility\**" />
+    <Content Remove="Views\Contact\**" />
+    <Content Remove="Views\Game\**" />
+    <EmbeddedResource Remove="Auth\**" />
+    <EmbeddedResource Remove="Components\**" />
+    <EmbeddedResource Remove="Filters\**" />
+    <EmbeddedResource Remove="TagHelpers\**" />
+    <EmbeddedResource Remove="Utility\**" />
+    <EmbeddedResource Remove="Views\Contact\**" />
+    <EmbeddedResource Remove="Views\Game\**" />
+    <None Remove="Auth\**" />
+    <None Remove="Components\**" />
+    <None Remove="Filters\**" />
+    <None Remove="TagHelpers\**" />
+    <None Remove="Utility\**" />
+    <None Remove="Views\Contact\**" />
+    <None Remove="Views\Game\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
