@@ -32,7 +32,9 @@
 <h3>Reviews for this game:</h3>
 @foreach (var review in @Model.Game.GameReviews)
 {
+    <div>@review.ApplicationUser.UserName</div>
     <div>@WebUtility.HtmlDecode(review.Review) </div>
+    <h3>Score:@review.ReviewScore</h3>
     <hr />
 }
 <form asp-controller="Home" asp-action="Details" method="post" class="form-horizontal" role="form">
