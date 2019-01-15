@@ -6,5 +6,6 @@ namespace RateYourEntertainment.Models
     {
         void AddGameReview(GameReview gameReview);
         IEnumerable<GameReview> GetReviewsForGame(int gameId);
+        IEnumerable<GameReview> GetAllReviews();
     }
 }

@@ -44,33 +44,42 @@ namespace RateYourEntertainment.Controllers
             return View(homeViewModel);
         }
         [HttpGet]
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             var game = _gameRepository.GetGameById(id);
+            var users = _userManager.Users;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = await _userManager.FindByIdAsync(userId);
             if (game == null)
             {
                 //throw new GameNotFoundException();
             }
             var category = _categoryRepository.GetCategoryById(game.CategoryId);
-            return View(new GameDetailViewModel() { Game = game , Category= category });
+            return View(new GameDetailViewModel() { Game = game , Category= category,Users=users});
         }
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Details(int id, string review, int reviewScore)
         {
             var game = _gameRepository.GetGameById(id);
+            var users = _userManager.Users;
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = await _userManager.FindByIdAsync(userId);
             var category = _categoryRepository.GetCategoryById(game.CategoryId);
             if (game == null)
             {
             }
+            if (review!=null)
+            {
+                string encodedReview = _htmlEncoder.Encode(review);
+                _gameReviewRepository.AddGameReview(new GameReview() { Game = game, Review = encodedReview, ReviewScore = reviewScore, ApplicationUser = user });
+                return View(new GameDetailViewModel() { Game = game, Category = category, Users = users });
+            }
 
-            string encodedReview = _htmlEncoder.Encode(review);
 
-            _gameReviewRepository.AddGameReview(new GameReview() { Game = game, Review = encodedReview, ReviewScore= reviewScore,ApplicationUser = user });
 
-            return View(new GameDetailViewModel() { Game = game,Category=category });
+
+            return RedirectToAction("Details");
         }
     }
 }

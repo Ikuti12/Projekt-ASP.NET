@@ -18,9 +18,15 @@ namespace RateYourEntertainment.Models
             _appDbContext.SaveChanges();
         }
 
+        public IEnumerable<GameReview> GetAllReviews()
+        {
+            return _appDbContext.GameReviews;
+        }
+
         public IEnumerable<GameReview> GetReviewsForGame(int gameId)
         {
             return _appDbContext.GameReviews.Where(g => g.Game.GameId == gameId);
         }
+
     }
 }

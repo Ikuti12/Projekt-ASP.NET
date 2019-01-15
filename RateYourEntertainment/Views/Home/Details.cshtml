@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
 @using System.Net
 @model GameDetailViewModel
 
@@ -30,13 +30,18 @@
 
 </div>
 <h3>Reviews for this game:</h3>
+
+@foreach (IdentityUser user in Model.Users)
+{
+}
 @foreach (var review in @Model.Game.GameReviews)
 {
-    <div>@review.ApplicationUser.UserName</div>
+    <div>@review.ApplicationUser</div>
     <div>@WebUtility.HtmlDecode(review.Review) </div>
     <h3>Score:@review.ReviewScore</h3>
     <hr />
 }
+
 <form asp-controller="Home" asp-action="Details" method="post" class="form-horizontal" role="form">
     <h4>Write a review</h4>
     <hr />
