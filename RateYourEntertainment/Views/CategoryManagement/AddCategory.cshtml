@@ -1,0 +1,17 @@
+﻿@model CategoryEditViewModel
+<h2 class="special">Create a new category</h2>
+<form asp-controller="CategoryManagement" asp-action="AddCategory" method="post" class="form-horizontal" role="form">
+    <h4 class="special">Enter the category details below</h4>
+    <hr />
+    <div class="form-group">
+        <label asp-for="Category.CategoryName" class="col-md-2 control-label special"></label>
+        <div class="col-md-10">
+            <input asp-for="Category.CategoryName" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Add" />
+        </div>
+    </div>
+</form>

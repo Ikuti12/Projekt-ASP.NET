@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Category>
+<h2 class="special">Category Management</h2>
+@if (!Model.Any())
+{
+    <tr><td colspan="3" class="text-center">No categories at this point</td></tr>
+}
+else
+{
+    <table class="table table-condensed table-bordered special">
+        <tr>
+            <th class="special">Category ID</th>
+            <th class="special">Name</th>
+            <th class="special">Actions</th>
+        </tr>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.CategoryId</td>
+                <td>@category.CategoryName</td>
+                <td>
+                    <form asp-controller="CategoryManagement" asp-action="DeleteCategory" asp-route-id="@category.CategoryId" method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="EditCategory" asp-route-id="@category.CategoryId">Edit</a>
+                    </form>
+                </td>
+            </tr>
+        }
+    </table>
+}
+<p>
+    <a class="btn btn-primary" asp-action="AddCategory">Add new category</a>
+</p>

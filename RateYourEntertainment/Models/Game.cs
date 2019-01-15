@@ -20,6 +20,7 @@ namespace RateYourEntertainment.Models
         [ValidUrl(ErrorMessage = "That's not a valid URL")]
         public string ImageURL { get; set; }
         public int CategoryId { get; set; }
+        public float Score { get; set; }
         public virtual Category Category { get; set; }
         public virtual List<GameReview> GameReviews { get; set; }
 

@@ -1,24 +1,24 @@
 ﻿@model IEnumerable<Game>
-<h2>Game Management</h2>
+<h2 class="special">Game Management</h2>
 @if (!Model.Any())
 {
-    <tr><td colspan="3" class="text-center">No games at this point :()</td></tr>
+    <tr><td colspan="3" class="text-center">No games at this point</td></tr>
 }
 else
 {
     <table class="table table-condensed table-bordered">
         <tr>
-            <th>Game ID</th>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Actions</th>
+            <th class="special">Game ID</th>
+            <th class="special">Image</th>
+            <th class="special">Name</th>
+            <th class="special">Actions</th>
         </tr>
         @foreach (var game in Model)
         {
         <tr>
-            <td>@game.GameId</td>
+            <td class="special">@game.GameId</td>
             <td><img src="@game.ImageThumbnailURL" /></td>
-            <td>@game.Name</td>
+            <td class="special">@game.Name</td>
             <td>
                 <form asp-controller="GameManagement" asp-action="DeleteGame" asp-route-id="@game.GameId" method="post">
                     <a class="btn btn-sm btn-primary" asp-action="EditGame" asp-route-id="@game.GameId">Edit</a>

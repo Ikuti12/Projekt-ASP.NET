@@ -2,7 +2,7 @@
 
 @model IEnumerable<IdentityRole>
 
-<h2>Role management</h2>
+<h2 class="special">Role management</h2>
 
 @if (!Model.Any())
 {
@@ -12,15 +12,15 @@ else
 {
     <table class="table table-condensed table-bordered">
         <tr>
-            <th>Role ID</th>
-            <th>Role name</th>
-            <th>Users</th>
+            <th class="special">Role ID</th>
+            <th class="special">Role name</th>
+            <th class="special">Users</th>
         </tr>
         @foreach (var role in Model)
         {
             <tr>
-                <td>@role.Id</td>
-                <td>@role.Name</td>
+                <td class="special">@role.Id</td>
+                <td class="special">@role.Name</td>
                 <td>
                     <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                         <a class="btn btn-sm btn-primary" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>

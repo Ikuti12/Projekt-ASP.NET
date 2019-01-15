@@ -43,7 +43,8 @@ namespace RateYourEntertainment.Controllers
             var user = new ApplicationUser()
             {
                 UserName = addUserViewModel.UserName,
-                Email = addUserViewModel.Email
+                Email = addUserViewModel.Email,
+                Birthdate = addUserViewModel.Birthdate
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, addUserViewModel.Password);
@@ -79,6 +80,7 @@ namespace RateYourEntertainment.Controllers
             {
                 user.Email = editUserViewModel.Email;
                 user.UserName = editUserViewModel.UserName;
+                user.Birthdate = editUserViewModel.Birthdate;
 
                 var result = await _userManager.UpdateAsync(user);
 

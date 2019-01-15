@@ -44,8 +44,6 @@ namespace RateYourEntertainment
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdministratorOnly", policy => policy.RequireRole("Administrator"));
-                options.AddPolicy("DeleteGame", policy => policy.RequireClaim("Delete Game", "Delete Game"));
-                options.AddPolicy("AddGame", policy => policy.RequireClaim("Add Game", "Add Game"));
             });
         }
 

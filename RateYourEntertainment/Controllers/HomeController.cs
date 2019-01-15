@@ -72,6 +72,7 @@ namespace RateYourEntertainment.Controllers
             if (review!=null)
             {
                 string encodedReview = _htmlEncoder.Encode(review);
+                game.Score = (game.Score + reviewScore) / game.GameReviews.Count();
                 _gameReviewRepository.AddGameReview(new GameReview() { Game = game, Review = encodedReview, ReviewScore = reviewScore, ApplicationUser = user });
                 return View(new GameDetailViewModel() { Game = game, Category = category, Users = users });
             }

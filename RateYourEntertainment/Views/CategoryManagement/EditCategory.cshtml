@@ -1,0 +1,26 @@
+﻿@model CategoryEditViewModel
+<h2 class="special">Edit game</h2>
+<form asp-controller="CategoryManagement" asp-action="EditCategory" method="post" class="form-horizontal" role="form">
+    <h4 class="special">Update the category details below</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Category.CategoryId" class="col-md-2 control-label special"></label>
+        <div class="col-md-10">
+            <input asp-for="Category.CategoryId" class="form-control"  readonly="readonly"/>
+            <span asp-validation-for="Category.CategoryId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Category.CategoryName" class="col-md-2 control-label special"></label>
+        <div class="col-md-10">
+            <input asp-for="Category.CategoryName" class="form-control" />
+            <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Update category" />
+        </div>
+    </div>
+</form>

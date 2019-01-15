@@ -21,5 +21,16 @@ namespace RateYourEntertainment.Models
             return _appDbContext.Categories;
         }
         public IEnumerable<Category> Categories => _appDbContext.Categories;
+        public void UpdateCategory(Category category)
+        {
+            _appDbContext.Categories.Update(category);
+            _appDbContext.SaveChanges();
+        }
+
+        public void CreateCategory(Category category)
+        {
+            _appDbContext.Categories.Add(category);
+            _appDbContext.SaveChanges();
+        }
     }
 }

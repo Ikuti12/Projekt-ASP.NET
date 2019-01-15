@@ -10,5 +10,8 @@ namespace RateYourEntertainment.Models
         IEnumerable<Category> Categories { get; }
         Category GetCategoryById(int categoryId);
         IEnumerable<Category> GetAllCategories();
+        void CreateCategory(Category category);
+
+        void UpdateCategory(Category category);
     }
 }

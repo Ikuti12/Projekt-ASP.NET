@@ -22,7 +22,6 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-controller="Home" asp-action="Index" class="navbar-brand">Rate Your Entertainment</a></li>
                     <li><a asp-controller="Game" asp-action="Index">Games Grouped By Categories</a></li>
-                    <li><a asp-controller="Contact" asp-action="Index">Contact us</a></li>
                     <li><a asp-controller="Feedback" asp-action="Index">Feedback</a></li>
                 </ul>
                 @if (SignInManager.IsSignedIn(User))
@@ -30,8 +29,8 @@
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                 <ul class="nav navbar-nav">
-                    <li><a asp-controller="Admin" asp-action="UserManagement">User Administration</a></li>
-                    <li><a asp-controller="Admin" asp-action="RoleManagement">Role Administration</a></li>
+                    <li><a asp-controller="Admin" asp-action="UserManagement">Manage Users</a></li>
+                    <li><a asp-controller="Admin" asp-action="RoleManagement">Manage Roles</a></li>
                     <li><a asp-controller="GameManagement" asp-action="Index">Manage Games</a></li>
                     <li><a asp-controller="CategoryManagement" asp-action="Index">Manage Categories</a></li>
                 </ul>

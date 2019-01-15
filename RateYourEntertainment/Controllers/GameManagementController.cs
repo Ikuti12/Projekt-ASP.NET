@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BethanysPieShop.Controllers
 {
     [Authorize(Roles = "Admin")]
-    [Authorize(Policy = "DeleteGame")]
     public class GameManagementController : Controller
     {
         private readonly IGameRepository _gameRepository;
