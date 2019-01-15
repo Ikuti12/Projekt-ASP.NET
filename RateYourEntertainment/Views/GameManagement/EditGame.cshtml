@@ -1,0 +1,62 @@
+﻿@model GameEditViewModel
+<h2>Edit game</h2>
+<form asp-controller="GameManagement" asp-action="EditGame" method="post" class="form-horizontal" role="form">
+    <h4>Update the game details below</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Game.GameId" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.GameId" class="form-control" />
+            <span asp-validation-for="Game.GameId" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.Name" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.Name" class="form-control" />
+            <span asp-validation-for="Game.Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.ShortDescription" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.ShortDescription" class="form-control" />
+            <span asp-validation-for="Game.ShortDescription" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.LongDescription" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.LongDescription" class="form-control" />
+            <span asp-validation-for="Game.LongDescription" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.ImageThumbnailURL" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.ImageThumbnailURL" class="form-control" />
+            <span asp-validation-for="Game.ImageThumbnailURL" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Game.ImageURL" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Game.ImageURL" class="form-control" />
+            <span asp-validation-for="Game.ImageURL" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Categories" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <select asp-for="CategoryId" class="form-control"
+                    asp-items="Model.Categories"></select>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Update game" />
+        </div>
+    </div>
+</form>

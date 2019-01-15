@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BethanysPieShop.Controllers
 {
-    [Authorize(Roles = "Administrators")]
+    [Authorize(Roles = "Admin")]
     [Authorize(Policy = "DeleteGame")]
-    public class PieManagementController : Controller
+    public class GameManagementController : Controller
     {
         private readonly IGameRepository _gameRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public PieManagementController(IGameRepository gameRepository, ICategoryRepository categoryRepository)
+        public GameManagementController(IGameRepository gameRepository, ICategoryRepository categoryRepository)
         {
             _gameRepository = gameRepository;
             _categoryRepository = categoryRepository;
@@ -45,17 +45,18 @@ namespace BethanysPieShop.Controllers
 
             if (ModelState.IsValid)
             {
+                gameEditViewModel.Game.CategoryId = gameEditViewModel.CategoryId;
                 _gameRepository.CreateGame(gameEditViewModel.Game);
                 return RedirectToAction("Index");
             }
 
             return View(gameEditViewModel);
         }
-        public IActionResult EditGame(int gameId)
+        public IActionResult EditGame(int id)
         {
             var categories = _categoryRepository.Categories;
 
-            var game = _gameRepository.Games.FirstOrDefault(g => g.GameId == gameId);
+            var game = _gameRepository.Games.FirstOrDefault(g => g.GameId == id);
 
             var gameEditViewModel = new GameEditViewModel
             {
@@ -71,7 +72,6 @@ namespace BethanysPieShop.Controllers
         }
 
         [HttpPost]
-        //public IActionResult EditPie([Bind("Pie")] PieEditViewModel pieEditViewModel)
         public IActionResult EditGame(GameEditViewModel gameEditViewModel)
         {
             gameEditViewModel.Game.CategoryId = gameEditViewModel.CategoryId;
@@ -85,16 +85,18 @@ namespace BethanysPieShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteGame(string gameId)
+        public IActionResult DeleteGame(int id)
         {
+            var game = _gameRepository.GetGameById(id);
+            _gameRepository.DeleteGame(game);
             return View();
         }
 
         [AcceptVerbs("Get", "Post")]
-        public IActionResult CheckIfPieNameAlreadyExists([Bind(Prefix = "Game.Name")]string name)
+        public IActionResult CheckIfGameNameAlreadyExists([Bind(Prefix = "Game.Name")]string name)
         {
             var game = _gameRepository.Games.FirstOrDefault(g => g.Name == name);
-            return game == null ? Json(true) : Json("That pie name is already taken");
+            return game == null ? Json(true) : Json("That game name is already taken");
         }
     }
 }

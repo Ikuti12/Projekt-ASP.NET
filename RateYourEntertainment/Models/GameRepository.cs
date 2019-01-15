@@ -14,7 +14,7 @@ namespace RateYourEntertainment.Models
         }
         public IEnumerable<Game> GetAllGames()
         {
-            return _appDbContext.Games;
+            return _appDbContext.Games.OrderBy(g => g.GameId);
         }
         public IEnumerable<Game> Games
         {
@@ -36,6 +36,11 @@ namespace RateYourEntertainment.Models
         public void CreateGame(Game game)
         {
             _appDbContext.Games.Add(game);
+            _appDbContext.SaveChanges();
+        }
+        public void DeleteGame(Game game)
+        {
+            _appDbContext.Games.Remove(game);
             _appDbContext.SaveChanges();
         }
     }

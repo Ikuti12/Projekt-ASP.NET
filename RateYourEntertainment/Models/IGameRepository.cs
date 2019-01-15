@@ -10,5 +10,6 @@ namespace RateYourEntertainment.Models
         void CreateGame(Game game);
 
         void UpdateGame(Game game);
+        void DeleteGame(Game game);
     }
 }
