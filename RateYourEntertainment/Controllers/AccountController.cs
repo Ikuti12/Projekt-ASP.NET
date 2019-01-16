@@ -69,6 +69,7 @@ namespace RateYourEntertainment.Controllers
                     await _userManager.AddToRoleAsync(user, role.Name);
                 }
             }
+            
             return View(loginViewModel);
         }
         [HttpPost]
