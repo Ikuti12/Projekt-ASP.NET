@@ -3,31 +3,38 @@
 @using Microsoft.AspNetCore.Authorization
 @model HomeViewModel
 @inject SignInManager<ApplicationUser> SignInManager
-@foreach (var game in Model.Games)
+@foreach (var mainCategory in Model.Categories)
 {
-    <div class="row">
-        <a asp-controller="Home" asp-action="Details" asp-route-id="@game.GameId">
-            <div class="thumbnail">
+    <h3 class="special">@mainCategory.CategoryName</h3>
+    @foreach (var game in Model.Games)
+    {
+        if (game.CategoryId == mainCategory.CategoryId)
+        {
+            <div class="row">
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@game.GameId">
+                    <div class="thumbnail">
 
-                <div class="caption">
-                    <img src="@game.ImageThumbnailURL" alt="">
-                    <h3 class="pull-right special">@Html.DisplayNameFor(modelItem => modelItem.Games.FirstOrDefault(g => g.GameId == game.GameId).Score) @game.Score</h3>
-                    <h3></h3>
-                    <h3 class="pull-right special">
-                        @foreach (var category in Model.Categories)
-                        {
-                            if (game.CategoryId == category.CategoryId)
-                            {
-                                @category.CategoryName
-                            }
-                        }
-                    </h3>
-                    <h3 class="special">
-                        @game.Name
-                    </h3>
-                    <h3 class="special">@game.ShortDescription</h3>
-                </div>
+                        <div class="caption">
+                            <img src="@game.ImageThumbnailURL" alt="">
+                            <h3 class="pull-right special">Score: @game.Score</h3>
+                            <h3></h3>
+                            <h3 class="pull-right special">
+                                @foreach (var category in Model.Categories)
+                                {
+                                    if (game.CategoryId == category.CategoryId)
+                                    {
+                                        @category.CategoryName
+                                    }
+                                }
+                            </h3>
+                            <h3 class="special">
+                                @game.Name
+                            </h3>
+                            <h3 class="special">@game.ShortDescription</h3>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
-    </div>
+            }
+    }
 }

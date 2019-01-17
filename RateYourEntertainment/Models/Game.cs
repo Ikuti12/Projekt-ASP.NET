@@ -11,6 +11,7 @@ namespace RateYourEntertainment.Models
     public class Game
     {
         public int GameId { get; set; }
+        [Remote("CheckIfGameNameAlreadyExists", "GameManagement", ErrorMessage = "That name already exists")]
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }

@@ -8,8 +8,8 @@ namespace RateYourEntertainment.Models
         public int GameReviewId { get; set; }
         public Game Game { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+        [StringLength(5000, ErrorMessage = "Your message is required")]
         public string Review { get; set; }
-        [Display(Name = "Score")]
         public int ReviewScore { get; set; }
     }
 }

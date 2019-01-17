@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace RateYourEntertainment.Controllers
+namespace BethanysPieShop.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class GameManagementController : Controller
@@ -41,7 +41,7 @@ namespace RateYourEntertainment.Controllers
         [HttpPost]
         public IActionResult AddGame(GameEditViewModel gameEditViewModel)
         {
-            TryValidateModel(gameEditViewModel);
+
             if (ModelState.IsValid)
             {
                 gameEditViewModel.Game.CategoryId = gameEditViewModel.CategoryId;
@@ -89,6 +89,13 @@ namespace RateYourEntertainment.Controllers
             var game = _gameRepository.GetGameById(id);
             _gameRepository.DeleteGame(game);
             return View();
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult CheckIfGameNameAlreadyExists([Bind(Prefix = "Game.Name")]string name)
+        {
+            var game = _gameRepository.Games.FirstOrDefault(g => g.Name == name);
+            return game == null ? Json(true) : Json("That game name is already taken");
         }
     }
 }

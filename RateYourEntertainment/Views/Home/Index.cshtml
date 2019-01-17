@@ -12,7 +12,7 @@
 
                     <div class="caption">
                         <img src="@game.ImageThumbnailURL" alt="">
-                        <h3 class="pull-right special">@Html.DisplayNameFor(modelItem => modelItem.Games.FirstOrDefault(g => g.GameId == game.GameId).Score) @game.Score</h3>
+                        <h3 class="pull-right special">Score: @game.Score</h3>
                         <h3></h3>
                         <h3 class="pull-right special">
                             @foreach (var category in Model.Categories)

@@ -11,6 +11,6 @@ namespace RateYourEntertainment.ViewModels
         public string Title { get; set; }
         public List<Game> Games {get;set;}
         public List<Category> Categories { get; set; }
-        public List<Game> HighRatedGames { get; set; }
+
     }
 }

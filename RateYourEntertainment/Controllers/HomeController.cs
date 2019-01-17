@@ -34,13 +34,11 @@ namespace RateYourEntertainment.Controllers
         {
             var games = _gameRepository.GetAllGames().OrderBy(g => g.Name);
             var categories = _categoryRepository.GetAllCategories().OrderBy(c => c.CategoryName);
-            var highRatedGames = (from g in games where g.Score > 3.0f select g);
             var homeViewModel = new HomeViewModel()
             {
                 Title = "Welcome to the best website to look at rating for your favorite entertainment media. RateYourEntertainment.com",
                 Games = games.ToList(),
-                Categories = categories.ToList(),
-                HighRatedGames = highRatedGames.ToList()
+                Categories = categories.ToList()
             };
 
             return View(homeViewModel);
@@ -71,22 +69,11 @@ namespace RateYourEntertainment.Controllers
             if (game == null)
             {
             }
-            if (review == null)
+            if (review!=null)
             {
-                return RedirectToAction("Details");
-            }
-            string encodedReview = _htmlEncoder.Encode(review);
-            var gameReview = new GameReview { Game = game, Review = encodedReview, ReviewScore = reviewScore, ApplicationUser = user };
-            TryValidateModel(gameReview);
-            if (ModelState.IsValid)
-            {
-                if (game.GameReviews.Count()>0)
-                {
-                    game.Score = game.Score * game.GameReviews.Count();
-                }
-                game.Score += reviewScore;
-                game.Score = game.Score / (game.GameReviews.Count() + 1);
-                _gameReviewRepository.AddGameReview(gameReview);
+                string encodedReview = _htmlEncoder.Encode(review);
+                game.Score = (game.Score + reviewScore) / game.GameReviews.Count();
+                _gameReviewRepository.AddGameReview(new GameReview() { Game = game, Review = encodedReview, ReviewScore = reviewScore, ApplicationUser = user });
                 return View(new GameDetailViewModel() { Game = game, Category = category, Users = users });
             }
 
