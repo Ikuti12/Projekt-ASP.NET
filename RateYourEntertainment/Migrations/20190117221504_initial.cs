@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace RateYourEntertainment.Migrations
 {
-    public partial class ReviewsAndCategories : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -107,18 +107,11 @@ namespace RateYourEntertainment.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true),
-                    ApplicationUserId = table.Column<string>(nullable: true)
+                    ClaimValue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
@@ -202,7 +195,8 @@ namespace RateYourEntertainment.Migrations
                     LongDescription = table.Column<string>(nullable: true),
                     ImageThumbnailURL = table.Column<string>(nullable: true),
                     ImageURL = table.Column<string>(nullable: true),
-                    CategoryId = table.Column<int>(nullable: false)
+                    CategoryId = table.Column<int>(nullable: false),
+                    Score = table.Column<float>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,11 +216,19 @@ namespace RateYourEntertainment.Migrations
                     GameReviewId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     GameId = table.Column<int>(nullable: true),
-                    Review = table.Column<string>(nullable: true)
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    Review = table.Column<string>(nullable: true),
+                    ReviewScore = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GameReviews", x => x.GameReviewId);
+                    table.ForeignKey(
+                        name: "FK_GameReviews_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_GameReviews_Games_GameId",
                         column: x => x.GameId,
@@ -246,11 +248,6 @@ namespace RateYourEntertainment.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_ApplicationUserId",
-                table: "AspNetUserClaims",
-                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -278,6 +275,11 @@ namespace RateYourEntertainment.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameReviews_ApplicationUserId",
+                table: "GameReviews",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_GameReviews_GameId",

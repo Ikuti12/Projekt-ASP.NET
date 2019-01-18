@@ -259,8 +259,7 @@ namespace RateYourEntertainment.Migrations
 
                     b.Property<int?>("GameId");
 
-                    b.Property<string>("Review")
-                        .HasMaxLength(5000);
+                    b.Property<string>("Review");
 
                     b.Property<int>("ReviewScore");
 

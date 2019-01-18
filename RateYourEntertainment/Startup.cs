@@ -33,7 +33,8 @@ namespace RateYourEntertainment
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
             }).AddEntityFrameworkStores<AppDbContext>();
-
+            services.AddDbContext<GameContext>(options =>
+options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IGameRepository, GameRepository>();
             services.AddTransient<IFeedbackRepository, FeedbackRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();

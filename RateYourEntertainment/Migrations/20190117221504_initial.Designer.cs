@@ -10,8 +10,8 @@ using RateYourEntertainment.Models;
 namespace RateYourEntertainment.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190114131602_ReviewsAndCategories")]
-    partial class ReviewsAndCategories
+    [Migration("20190117221504_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,8 +71,6 @@ namespace RateYourEntertainment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ApplicationUserId");
-
                     b.Property<string>("ClaimType");
 
                     b.Property<string>("ClaimValue");
@@ -81,8 +79,6 @@ namespace RateYourEntertainment.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("UserId");
 
@@ -244,6 +240,8 @@ namespace RateYourEntertainment.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<float>("Score");
+
                     b.Property<string>("ShortDescription");
 
                     b.HasKey("GameId");
@@ -259,11 +257,17 @@ namespace RateYourEntertainment.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<int?>("GameId");
 
                     b.Property<string>("Review");
 
+                    b.Property<int>("ReviewScore");
+
                     b.HasKey("GameReviewId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("GameId");
 
@@ -280,10 +284,6 @@ namespace RateYourEntertainment.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("RateYourEntertainment.Auth.ApplicationUser")
-                        .WithMany("Claims")
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("RateYourEntertainment.Auth.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -329,6 +329,10 @@ namespace RateYourEntertainment.Migrations
 
             modelBuilder.Entity("RateYourEntertainment.Models.GameReview", b =>
                 {
+                    b.HasOne("RateYourEntertainment.Auth.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("RateYourEntertainment.Models.Game", "Game")
                         .WithMany("GameReviews")
                         .HasForeignKey("GameId");

@@ -6,19 +6,15 @@
 
   <ItemGroup>
     <Compile Remove="Filters\**" />
-    <Compile Remove="TagHelpers\**" />
     <Compile Remove="Views\Contact\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="Filters\**" />
-    <Content Remove="TagHelpers\**" />
     <Content Remove="Views\Contact\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Filters\**" />
-    <EmbeddedResource Remove="TagHelpers\**" />
     <EmbeddedResource Remove="Views\Contact\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Filters\**" />
-    <None Remove="TagHelpers\**" />
     <None Remove="Views\Contact\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
@@ -27,6 +23,10 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RateYourEntertainment.Models;
 using RateYourEntertainment.ViewModels;
 
@@ -14,26 +17,23 @@ namespace RateYourEntertainment.Controllers
     [Authorize]
     public class GameController : Controller
     {
+        private readonly GameContext _context;
         private readonly IGameRepository _gameRepository;
         private readonly ICategoryRepository _categoryRepository;
 
-        public GameController(IGameRepository gameRepository, ICategoryRepository categoryRepository)
+        public GameController(GameContext context, IGameRepository gameRepository, ICategoryRepository categoryRepository)
         {
+            _context = context;
             _gameRepository = gameRepository;
             _categoryRepository = categoryRepository;
         }
         // GET: /<controller>/
+
         public IActionResult Index()
         {
-            var games = _gameRepository.GetAllGames().OrderBy(g => g.Name);
-            var categories = _categoryRepository.GetAllCategories().OrderBy(c => c.CategoryName);
-            var homeViewModel = new HomeViewModel()
-            {
-                Games = games.ToList(),
-                Categories = categories.ToList()
-            };
+            var games = from g in _context.Games select new { g.Name, Count = g.GameReviews.Count() };
 
-            return View(homeViewModel);
+            return View(games.ToList());
         }
     }
 }
