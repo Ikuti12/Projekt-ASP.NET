@@ -6,11 +6,11 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{01F181C9-D4A6-4CB6-9BC7-CF3D3A68DAFB}</ProjectGuid>
+    <ProjectGuid>{98DC0D35-CC89-4B67-A056-C946BCC6758F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CodedUITestProject1</RootNamespace>
-    <AssemblyName>CodedUITestProject1</AssemblyName>
+    <RootNamespace>CodedUITestProject</RootNamespace>
+    <AssemblyName>CodedUITestProject</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -53,6 +53,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminTest.cs" />
     <Compile Include="CodedUITest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIMap.cs">
