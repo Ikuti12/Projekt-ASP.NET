@@ -61,6 +61,77 @@ namespace Tests
             }
         }
         [Test]
+        public void SendFeedbackWorksAfterLogin()
+        {
+            var driver = new FirefoxDriver(service);
+            var url = "http://localhost:63418/Account/Login";
+            try
+            {
+                var nav = driver.Navigate();
+                nav.GoToUrl(url);
+                var usernameField = driver.FindElement(By.Id("UserName"));
+                usernameField.Click();
+                usernameField.SendKeys("Admin");
+                var passwordField = driver.FindElement(By.Id("Password"));
+                passwordField.Click();
+                passwordField.SendKeys("S3cr3tP@ss");
+                var submitButton = driver.FindElement(By.Id("Submit"));
+                submitButton.Click();
+                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+                wait.Until(UrlToBe("http://localhost:63418/"));
+                var feedbackLink = driver.FindElement(By.LinkText("Feedback"));
+                feedbackLink.Click();
+                var nameField = driver.FindElement(By.Id("Name"));
+                nameField.Click();
+                nameField.SendKeys("Username");
+                var emailField = driver.FindElement(By.Id("Email"));
+                emailField.Click();
+                emailField.SendKeys("TestTestTest@gmail.com");
+                var msgField = driver.FindElement(By.Id("Message"));
+                msgField.Click();
+                msgField.SendKeys("Message");
+                var contactmeField = driver.FindElement(By.Id("ContactMe"));
+                contactmeField.Click();
+                submitButton = driver.FindElement(By.Id("Submit"));
+                submitButton.Click();
+                wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
+                wait.Until(UrlToBe("http://localhost:63418/Feedback/FeedbackComplete"));
+                var welcome = driver.FindElementByClassName("special").Text;
+                StringAssert.Contains(welcome, "Thank you for your feedback, we take it very seriously!");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+            finally
+            {
+                driver.Quit();
+            }
+        }
+        [Test]
+        public void CantSendFeedbackWhenNotLogIn()
+        {
+            var driver = new FirefoxDriver(service);
+            var url = "http://localhost:63418/";
+            try
+            {
+                var nav = driver.Navigate();
+                nav.GoToUrl(url);
+                var feedbackLink = driver.FindElement(By.LinkText("Feedback"));
+                feedbackLink.Click();
+                var text = driver.FindElementByClassName("special");
+                StringAssert.Contains(text.Text, "Before using the website features, you have to log in or register!");
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+            finally
+            {
+                driver.Quit();
+            }
+        }
+        [Test]
         public void RegisterWithoutPasswordFail()
         {
             var driver = new FirefoxDriver(service);
