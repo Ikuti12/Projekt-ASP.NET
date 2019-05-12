@@ -86,13 +86,13 @@ namespace Tests
                 nameField.SendKeys("Username");
                 var emailField = driver.FindElement(By.Id("Email"));
                 emailField.Click();
-                emailField.SendKeys("TestTestTest@gmail.com");
+                emailField.SendKeys("borgitek@gmail.com");
                 var msgField = driver.FindElement(By.Id("Message"));
                 msgField.Click();
                 msgField.SendKeys("Message");
                 var contactmeField = driver.FindElement(By.Id("ContactMe"));
                 contactmeField.Click();
-                submitButton = driver.FindElement(By.Id("Submit"));
+                submitButton = driver.FindElement(By.CssSelector("input[type = 'submit']"));
                 submitButton.Click();
                 wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
                 wait.Until(UrlToBe("http://localhost:63418/Feedback/FeedbackComplete"));
